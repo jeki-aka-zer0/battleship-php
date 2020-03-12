@@ -7,7 +7,7 @@ use InvalidArgumentException;
 class Letter
 {
 
-    public static $letters = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H');
+    public static $letters = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
 
     public static function value($index)
     {
@@ -18,7 +18,7 @@ class Letter
     {
         if(!in_array($letter, self::$letters))
         {
-            throw new InvalidArgumentException("Letter not exist");
+            throw new InvalidArgumentException("Letter not exist: {$letter}");
         }
 
         return $letter;
