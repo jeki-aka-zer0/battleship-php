@@ -59,7 +59,9 @@ class App
 
     public static function InitializeMyFleet()
     {
-        self::$myFleet = GameController::initializeShips(self::$myFleet, require __DIR__.'/Batteship/MyFleetSets.php');
+        $data = require __DIR__ . '/Batteship/FleetSets.php';
+
+        self::$myFleet = GameController::initializeShips(self::$myFleet, $data[0]);
 
         if (!self::IS_DEV) {
             self::$console->printMessage("Please position your fleet (Game board has size from A to H and 1 to 8) :");
