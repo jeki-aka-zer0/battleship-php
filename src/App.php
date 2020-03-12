@@ -11,6 +11,52 @@ class App
     private static $enemyFleet = array();
     private static $console;
 
+    private static $fleets = array(
+        "Aircraft Carrier" => [
+            'color' => Color::CADET_BLUE,
+            'positions' => [
+                ['B', 1],
+                ['B', 2],
+                ['B', 3],
+                ['B', 4],
+                ['B', 5],
+            ]
+        ],
+        'Battleship' => [
+            'color' => Color::RED,
+            'positions' => [
+                ['E', 4],
+                ['F', 4],
+                ['G', 4],
+                ['H', 4],
+            ]
+        ],
+        'Submarine' => [
+            'color' => Color::CHARTREUSE,
+            'positions' => [
+                ['C', 8],
+                ['C', 9],
+                ['C', 10],
+            ]
+        ],
+        'Destroyer' => [
+            'color' => Color::YELLOW,
+            'positions' => [
+                ['E', 8],
+                ['E', 9],
+                ['E', 10],
+            ]
+        ],
+        'Patrol Boat' => [
+            'color' => Color::ORANGE,
+            'positions' => [
+                ['I', 6],
+                ['I', 7],
+            ]
+        ]
+
+    );
+
     static function run()
     {
         self::$console = new Console();
@@ -79,7 +125,7 @@ class App
 
         self::$console->printMessage("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
-        /*array_push(self::$myFleet[0]->getPositions(), new Position('B', 4));
+        array_push(self::$myFleet[0]->getPositions(), new Position('B', 4));
         array_push(self::$myFleet[0]->getPositions(), new Position('B', 5));
         array_push(self::$myFleet[0]->getPositions(), new Position('B', 6));
         array_push(self::$myFleet[0]->getPositions(), new Position('B', 7));
@@ -99,7 +145,7 @@ class App
         array_push(self::$myFleet[3]->getPositions(), new Position('H', 8));
 
         array_push(self::$myFleet[4]->getPositions(), new Position('C', 5));
-        array_push(self::$myFleet[4]->getPositions(), new Position('C', 6));*/
+        array_push(self::$myFleet[4]->getPositions(), new Position('C', 6));
 
         foreach (self::$myFleet as $ship) {
 
@@ -183,7 +229,7 @@ class App
         $letter = substr($input, 0, 1);
         $number = substr($input, 1, 1);
 
-        if(!is_numeric($number)) {
+        if (!is_numeric($number)) {
             throw new Exception("Not a number: $number");
         }
 
