@@ -37,14 +37,20 @@ class GameController
         return false;
     }
 
-    public static function initializeShips()
+    public static function initializeShips(array $fleet, array $data): array
     {
-        return Array(
-            new Ship("Aircraft Carrier", 5, Color::CADET_BLUE),
-            new Ship("Battleship", 4, Color::RED),
-            new Ship("Submarine", 3, Color::CHARTREUSE),
-            new Ship("Destroyer", 3, Color::YELLOW),
-            new Ship("Patrol Boat", 2, Color::ORANGE));
+        foreach ($data as $name => $item) {
+            $size = count($item['positions']);
+            $ship = new Ship($name, $size, $item['color']);
+
+            foreach ($item['positions'] as $position) {
+                array_push($ship->getPositions(), new Position($position[0], $position[1]));
+            }
+
+            $fleet[] = $ship;
+        }
+
+        return $fleet;
     }
 
     public static function isShipValid($ship)

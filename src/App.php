@@ -7,6 +7,8 @@ use Battleship\Color;
 
 class App
 {
+    private const IS_DEV = true;
+
     private static $myFleet = array();
     private static $enemyFleet = array();
     private static $console;
@@ -37,29 +39,11 @@ class App
 
     public static function InitializeEnemyFleet()
     {
-        self::$enemyFleet = GameController::initializeShips();
+        $allData = require __DIR__ . '/Batteship/FleetSets.php';
+        $size = count($allData);
+        $data = $allData[random_int(0, $size)];
 
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 4));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 5));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 6));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 7));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 8));
-
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 6));
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 7));
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 8));
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 9));
-
-        array_push(self::$enemyFleet[2]->getPositions(), new Position('A', 3));
-        array_push(self::$enemyFleet[2]->getPositions(), new Position('B', 3));
-        array_push(self::$enemyFleet[2]->getPositions(), new Position('C', 3));
-
-        array_push(self::$enemyFleet[3]->getPositions(), new Position('F', 8));
-        array_push(self::$enemyFleet[3]->getPositions(), new Position('G', 8));
-        array_push(self::$enemyFleet[3]->getPositions(), new Position('H', 8));
-
-        array_push(self::$enemyFleet[4]->getPositions(), new Position('C', 5));
-        array_push(self::$enemyFleet[4]->getPositions(), new Position('C', 6));
+        self::$enemyFleet = GameController::initializeShips(self::$enemyFleet, $data);
     }
 
     public static function getRandomPosition()
@@ -75,43 +59,22 @@ class App
 
     public static function InitializeMyFleet()
     {
-        self::$myFleet = GameController::initializeShips();
+        self::$myFleet = GameController::initializeShips(self::$myFleet, require __DIR__.'/Batteship/MyFleetSets.php');
 
-        self::$console->printMessage("Please position your fleet (Game board has size from A to H and 1 to 8) :");
+        if (!self::IS_DEV) {
+            self::$console->printMessage("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 4));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 5));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 6));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 7));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 8));
+            foreach (self::$myFleet as $ship) {
+                self::$console->println();
+                self::$console->printMessage(
+                    sprintf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize())
+                );
 
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 6));
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 7));
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 8));
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 9));
-
-        array_push(self::$myFleet[2]->getPositions(), new Position('A', 3));
-        array_push(self::$myFleet[2]->getPositions(), new Position('B', 3));
-        array_push(self::$myFleet[2]->getPositions(), new Position('C', 3));
-
-        array_push(self::$myFleet[3]->getPositions(), new Position('F', 8));
-        array_push(self::$myFleet[3]->getPositions(), new Position('G', 8));
-        array_push(self::$myFleet[3]->getPositions(), new Position('H', 8));
-
-        array_push(self::$myFleet[4]->getPositions(), new Position('C', 5));
-        array_push(self::$myFleet[4]->getPositions(), new Position('C', 6));
-
-        foreach (self::$myFleet as $ship) {
-
-            self::$console->println();
-            self::$console->printMessage(
-                sprintf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize())
-            );
-
-            for ($i = 1; $i <= $ship->getSize(); $i++) {
-                self::$console->printMessage(sprintf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize()));
-                $input = readline("");
-                $ship->addPosition($input);
+                for ($i = 1; $i <= $ship->getSize(); $i++) {
+                    self::$console->printMessage(sprintf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize()));
+                    $input = readline("");
+                    $ship->addPosition($input);
+                }
             }
         }
     }
