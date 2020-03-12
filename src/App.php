@@ -11,52 +11,6 @@ class App
     private static $enemyFleet = array();
     private static $console;
 
-    private static $fleets = array(
-        "Aircraft Carrier" => [
-            'color' => Color::CADET_BLUE,
-            'positions' => [
-                ['B', 1],
-                ['B', 2],
-                ['B', 3],
-                ['B', 4],
-                ['B', 5],
-            ]
-        ],
-        'Battleship' => [
-            'color' => Color::RED,
-            'positions' => [
-                ['E', 4],
-                ['F', 4],
-                ['G', 4],
-                ['H', 4],
-            ]
-        ],
-        'Submarine' => [
-            'color' => Color::CHARTREUSE,
-            'positions' => [
-                ['C', 8],
-                ['C', 9],
-                ['C', 10],
-            ]
-        ],
-        'Destroyer' => [
-            'color' => Color::YELLOW,
-            'positions' => [
-                ['E', 8],
-                ['E', 9],
-                ['E', 10],
-            ]
-        ],
-        'Patrol Boat' => [
-            'color' => Color::ORANGE,
-            'positions' => [
-                ['I', 6],
-                ['I', 7],
-            ]
-        ]
-
-    );
-
     static function run()
     {
         self::$console = new Console();
