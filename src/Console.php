@@ -2,6 +2,8 @@
 
 //use Battleship\Color;
 
+use Battleship\Color;
+
 class Console
 {
     function resetForegroundColor()
@@ -17,5 +19,26 @@ class Console
     function println($line = "")
     {
         echo "$line\n";
+    }
+
+    public function printError($message): void
+    {
+        $this->setForegroundColor(Color::RED);
+        $this->println($message);
+        $this->resetForegroundColor();
+    }
+
+    public function printSuccess($message): void
+    {
+        $this->setForegroundColor(Color::CHARTREUSE);
+        $this->println($message);
+        $this->resetForegroundColor();
+    }
+
+    public function printMessage($message): void
+    {
+        $this->setForegroundColor(Color::YELLOW);
+        $this->println($message);
+        $this->resetForegroundColor();
     }
 }

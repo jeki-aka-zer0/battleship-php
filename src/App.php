@@ -77,7 +77,7 @@ class App
     {
         self::$myFleet = GameController::initializeShips();
 
-        self::$console->println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
+        self::$console->printMessage("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
 
 // @TODO REMOVE
@@ -107,10 +107,13 @@ class App
         /*foreach (self::$myFleet as $ship) {
 
             self::$console->println();
-            printf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize());
+            self::$console->printMessage(
+                sprintf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize())
+            );
 
             for ($i = 1; $i <= $ship->getSize(); $i++) {
                 printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
+                self::$console->printMessage(sprintf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize()));
                 $input = readline("");
                 $ship->addPosition($input);
             }
@@ -144,8 +147,8 @@ class App
 
         while (true) {
             self::$console->println("");
-            self::$console->println("Player, it's your turn");
-            self::$console->println("Enter coordinates for your shot :");
+            self::$console->printMessage("Player, it's your turn");
+            self::$console->printMessage("Enter coordinates for your shot :");
             $position = readline("");
 
             $isHit = GameController::checkIsHit(self::$enemyFleet, self::parsePosition($position));
@@ -162,21 +165,28 @@ class App
             }
 
             if ($isHit) {
-                $color = Color::CHARTREUSE;
-                $message = "Yeah! Nice hit!";
+                self::$console->printSuccess("Yeah! Nice hit!");
             } else {
-                $color = Color::RED;
-                $message = "Miss";
+                self::$console->printError("Miss");
             }
-            self::$console->setForegroundColor($color);
-            echo $message;
-            self::$console->resetForegroundColor($color);
+
             self::$console->println();
 
             $position = self::getRandomPosition();
             $isHit = GameController::checkIsHit(self::$myFleet, $position);
+
             self::$console->println();
-            printf("Computer shoot in %s%s and %s", $position->getColumn(), $position->getRow(), $isHit ? "hit your ship !\n" : "miss");
+            $message = sprintf(
+                "Computer shoot in %s%s and %s",
+                $position->getColumn(),
+                $position->getRow(),
+                $isHit ? "hit your ship !\n" : "miss"
+            );
+            if ($isHit) {
+                self::$console->printError($message);
+            } else {
+                self::$console->printSuccess($message);
+            }
             if ($isHit) {
                 self::beep();
 
