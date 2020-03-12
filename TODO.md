@@ -1,5 +1,4 @@
 #ToDo:
-- yo
 -[x] Create docker image
 -[x] Add unit tests
 -[x] Add e2e tests

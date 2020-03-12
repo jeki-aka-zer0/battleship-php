@@ -79,7 +79,32 @@ class App
 
         self::$console->println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
-        foreach (self::$myFleet as $ship) {
+
+// @TODO REMOVE
+        array_push(self::$myFleet[0]->getPositions(), new Position('B', 4));
+        array_push(self::$myFleet[0]->getPositions(), new Position('B', 5));
+        array_push(self::$myFleet[0]->getPositions(), new Position('B', 6));
+        array_push(self::$myFleet[0]->getPositions(), new Position('B', 7));
+        array_push(self::$myFleet[0]->getPositions(), new Position('B', 8));
+
+        array_push(self::$myFleet[1]->getPositions(), new Position('E', 6));
+        array_push(self::$myFleet[1]->getPositions(), new Position('E', 7));
+        array_push(self::$myFleet[1]->getPositions(), new Position('E', 8));
+        array_push(self::$myFleet[1]->getPositions(), new Position('E', 9));
+
+        array_push(self::$myFleet[2]->getPositions(), new Position('A', 3));
+        array_push(self::$myFleet[2]->getPositions(), new Position('B', 3));
+        array_push(self::$myFleet[2]->getPositions(), new Position('C', 3));
+
+        array_push(self::$myFleet[3]->getPositions(), new Position('F', 8));
+        array_push(self::$myFleet[3]->getPositions(), new Position('G', 8));
+        array_push(self::$myFleet[3]->getPositions(), new Position('H', 8));
+
+        array_push(self::$myFleet[4]->getPositions(), new Position('C', 5));
+        array_push(self::$myFleet[4]->getPositions(), new Position('C', 6));
+
+
+        /*foreach (self::$myFleet as $ship) {
 
             self::$console->println();
             printf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize());
@@ -89,7 +114,7 @@ class App
                 $input = readline("");
                 $ship->addPosition($input);
             }
-        }
+        }*/
     }
 
     public static function beep()
@@ -136,7 +161,16 @@ class App
                 self::$console->println("                   \\  \\   /  /");
             }
 
-            echo $isHit ? "Yeah ! Nice hit !" : "Miss";
+            if ($isHit) {
+                $color = Color::CHARTREUSE;
+                $message = "Yeah! Nice hit!";
+            } else {
+                $color = Color::RED;
+                $message = "Miss";
+            }
+            self::$console->setForegroundColor($color);
+            echo $message;
+            self::$console->resetForegroundColor($color);
             self::$console->println();
 
             $position = self::getRandomPosition();
