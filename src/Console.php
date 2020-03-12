@@ -41,4 +41,9 @@ class Console
         $this->println($message);
         $this->resetForegroundColor();
     }
+
+    public function printLine(): void
+    {
+        $this->println('____________________________________');
+    }
 }

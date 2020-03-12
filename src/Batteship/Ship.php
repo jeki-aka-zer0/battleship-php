@@ -9,6 +9,7 @@ class Ship
     private $size;
     private $color;
     private $positions = array();
+    private $hits = 0;
 
     public function __construct($name, $size, $color = null)
     {
@@ -59,4 +60,13 @@ class Ship
         $this->size = $size;
     }
 
+    public function incrementHits(): void
+    {
+        $this->hits++;
+    }
+
+    public function isSunken(): bool
+    {
+        return $this->size == $this->hits;
+    }
 }

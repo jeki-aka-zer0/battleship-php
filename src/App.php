@@ -79,9 +79,7 @@ class App
 
         self::$console->printMessage("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
-
-// @TODO REMOVE
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 4));
+        /*array_push(self::$myFleet[0]->getPositions(), new Position('B', 4));
         array_push(self::$myFleet[0]->getPositions(), new Position('B', 5));
         array_push(self::$myFleet[0]->getPositions(), new Position('B', 6));
         array_push(self::$myFleet[0]->getPositions(), new Position('B', 7));
@@ -101,10 +99,9 @@ class App
         array_push(self::$myFleet[3]->getPositions(), new Position('H', 8));
 
         array_push(self::$myFleet[4]->getPositions(), new Position('C', 5));
-        array_push(self::$myFleet[4]->getPositions(), new Position('C', 6));
+        array_push(self::$myFleet[4]->getPositions(), new Position('C', 6));*/
 
-
-        /*foreach (self::$myFleet as $ship) {
+        foreach (self::$myFleet as $ship) {
 
             self::$console->println();
             self::$console->printMessage(
@@ -112,12 +109,11 @@ class App
             );
 
             for ($i = 1; $i <= $ship->getSize(); $i++) {
-                printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
                 self::$console->printMessage(sprintf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize()));
                 $input = readline("");
                 $ship->addPosition($input);
             }
-        }*/
+        }
     }
 
     public static function beep()
@@ -133,41 +129,24 @@ class App
 
     public static function StartGame()
     {
-        self::$console->println("\033[2J\033[;H");
-        self::$console->println("                  __");
-        self::$console->println("                 /  \\");
-        self::$console->println("           .-.  |    |");
-        self::$console->println("   *    _.-'  \\  \\__/");
-        self::$console->println("    \\.-'       \\");
-        self::$console->println("   /          _/");
-        self::$console->println("  |      _  /\" \"");
-        self::$console->println("  |     /_\'");
-        self::$console->println("   \\    \\_/");
-        self::$console->println("    \" \"\" \"\" \"\" \"");
+        self::$console->println('🔫');
 
         while (true) {
-            self::$console->println("");
-            self::$console->printMessage("Player, it's your turn");
-            self::$console->printMessage("Enter coordinates for your shot :");
+            self::$console->println("‍👵 Player, it's your turn");
+            self::$console->printMessage("Enter coordinates for your shot:");
             $position = readline("");
 
+            // GameController::asd(self::$enemyFleet);
             $isHit = GameController::checkIsHit(self::$enemyFleet, self::parsePosition($position));
             if ($isHit) {
                 self::beep();
-                self::$console->println("                \\         .  ./");
-                self::$console->println("              \\      .:\" \";'.:..\" \"   /");
-                self::$console->println("                  (M^^.^~~:.'\" \").");
-                self::$console->println("            -   (/  .    . . \\ \\)  -");
-                self::$console->println("               ((| :. ~ ^  :. .|))");
-                self::$console->println("            -   (\\- |  \\ /  |  /)  -");
-                self::$console->println("                 -\\  \\     /  /-");
-                self::$console->println("                   \\  \\   /  /");
+                self::$console->println('🔫');
             }
 
             if ($isHit) {
-                self::$console->printSuccess("Yeah! Nice hit!");
+                self::$console->printSuccess("Yeah! Nice hit! 🎯");
             } else {
-                self::$console->printError("Miss");
+                self::$console->printError("Miss 🌊");
             }
 
             self::$console->println();
@@ -175,12 +154,11 @@ class App
             $position = self::getRandomPosition();
             $isHit = GameController::checkIsHit(self::$myFleet, $position);
 
-            self::$console->println();
             $message = sprintf(
-                "Computer shoot in %s%s and %s",
+                "🤖 Computer shoot in %s%s and %s",
                 $position->getColumn(),
                 $position->getRow(),
-                $isHit ? "hit your ship !\n" : "miss"
+                $isHit ? "hit your ship! 🎯\n" : "miss 🌊"
             );
             if ($isHit) {
                 self::$console->printError($message);
@@ -190,17 +168,12 @@ class App
             if ($isHit) {
                 self::beep();
 
-                self::$console->println("                \\         .  ./");
-                self::$console->println("              \\      .:\" \";'.:..\" \"   /");
-                self::$console->println("                  (M^^.^~~:.'\" \").");
-                self::$console->println("            -   (/  .    . . \\ \\)  -");
-                self::$console->println("               ((| :. ~ ^  :. .|))");
-                self::$console->println("            -   (\\- |  \\ /  |  /)  -");
-                self::$console->println("                 -\\  \\     /  /-");
-                self::$console->println("                   \\  \\   /  /");
-
+                self::$console->println('Boom 💥');
             }
 
+            self::$console->println('');
+            self::$console->printLine();
+            self::$console->println('');
 //            exit();
         }
     }
