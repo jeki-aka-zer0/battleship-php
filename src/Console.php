@@ -46,4 +46,29 @@ class Console
     {
         $this->println('____________________________________');
     }
+
+    public function printVictory(): void
+    {
+            $this->println('CONGRATULATIONS');
+        $this->println('⁣⁣        ️');
+        $this->println('⁣⁣  ✨🌟✨  ️️');
+        $this->println(' ⁣⁣✨🌟🌟🌟✨  ');
+        $this->println('⁣ ️🌟💥💥🌟💥✨ ️');
+        $this->println('   🌟🌟💥🌟  ');
+        $this->println('⁣⁣   ️ 🌟✨  ');
+        $this->println('⁣⁣        ');
+        $this->println('⁣⁣  YOU WON!️');
+        $this->println('        ️');
+        $this->println('⁣⁣🌊 🎉 ⛴  🎉 🌊');
+        $this->println('⁣⁣        ️');
+    }
+
+    public function printLoss(): void
+    {
+        $this->println(' 🥵  🥵  🥵  🥵  🥵  🥵');
+        $this->println('⁣🤯  🤯  🤯  🤯  🤯  🤯️️');
+        $this->println('  ☹️  YOU LOST ☹️');
+        $this->println('⁣🤯  🤯  🤯  🤯  🤯  🤯️');
+        $this->println(' 🥵  🥵  🥵  🥵  🥵  🥵');
+    }
 }
