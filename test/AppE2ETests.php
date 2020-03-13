@@ -32,6 +32,7 @@ final class AppE2ETests extends TestCase
         ob_end_clean();
         $this->assertStringContainsString("Welcome to Battleship", $out);
         $this->assertStringContainsString("Miss", $out);
+        $this->assertTrue(true);
     }
 
 }

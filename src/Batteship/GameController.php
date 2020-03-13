@@ -40,7 +40,7 @@ class GameController
     public static function initializeShips(array $fleet, array $data): array
     {
         foreach ($data as $name => $item) {
-            $size = count($item['positions']);
+            $size = count($item['positions'] ?? []);
             $ship = new Ship($name, $size, $item['color']);
 
             foreach ($item['positions'] as $position) {
