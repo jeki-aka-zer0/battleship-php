@@ -94,7 +94,6 @@ class App
 
     public static function StartGame()
     {
-        self::$console->println('🔫');
 
         while (true) {
             self::$console->println("‍👵 Player, it's your turn");
@@ -111,7 +110,7 @@ class App
             if ($isHit) {
                 self::$console->printSuccess("Yeah! Nice hit! 🎯");
             } else {
-                self::$console->printError("Miss 🌊");
+                self::$console->printError("Oh no, you missed 🌊");
             }
 
             self:: printGameResultIfFinished();
@@ -125,7 +124,7 @@ class App
                 "🤖 Computer shoot in %s%s and %s",
                 $position->getColumn(),
                 $position->getRow(),
-                $isHit ? "hit your ship! 🎯\n" : "miss 🌊"
+                $isHit ? "hit your ship! 🎯\n" : "missed 🌊"
             );
             if ($isHit) {
                 self::$console->printError($message);
@@ -135,7 +134,9 @@ class App
             if ($isHit) {
                 self::beep();
 
+                self::$console->setForegroundColor(Color::RED);
                 self::$console->println('Boom 💥');
+                self::$console->resetForegroundColor();
             }
 
             self:: printGameResultIfFinished();

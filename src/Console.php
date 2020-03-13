@@ -49,6 +49,7 @@ class Console
 
     public function printVictory(): void
     {
+            $this->println('CONGRATULATIONS');
         $this->println('⁣⁣        ️');
         $this->println('⁣⁣  ✨🌟✨  ️️');
         $this->println(' ⁣⁣✨🌟🌟🌟✨  ');
@@ -59,6 +60,7 @@ class Console
         $this->println('⁣⁣  YOU WON!️');
         $this->println('        ️');
         $this->println('⁣⁣🌊 🎉 ⛴  🎉 🌊');
+        $this->println('⁣⁣        ️');
     }
 
     public function printLoss(): void
