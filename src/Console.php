@@ -51,10 +51,10 @@ class Console
     {
             $this->println('CONGRATULATIONS');
         $this->println('⁣⁣        ️');
-        $this->println('⁣⁣  ✨🌟✨  ️️');
+        $this->println('⁣⁣    ✨🌟✨🌟  ️️');
         $this->println(' ⁣⁣✨🌟🌟🌟✨  ');
         $this->println('⁣ ️🌟💥💥🌟💥✨ ️');
-        $this->println('   🌟🌟💥🌟  ');
+        $this->println('   🌟🌟💥🌟✨  ');
         $this->println('⁣⁣   ️ 🌟✨  ');
         $this->println('⁣⁣        ');
         $this->println('⁣⁣  YOU WON!️');
