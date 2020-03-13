@@ -159,11 +159,11 @@ class App
     private static function printGameResultIfFinished()
     {
         if (self::isMyVictory()) {
-            self::$console->println('My victory!!');
+            self::$console->printVictory();
             exit;
         }
         if (self::isComputerVictory()) {
-            self::$console->println('Computer victory!!');
+            self::$console->printLoss();
             exit;
         }
     }
