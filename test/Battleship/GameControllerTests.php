@@ -99,4 +99,10 @@ final class GameControllerTests extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testIsFleetDead()
+    {
+        $fleet = GameController::initializeShips([], $this->data);
+        $this->assertFalse(GameController::isFleetDead($fleet));
+    }
 }
