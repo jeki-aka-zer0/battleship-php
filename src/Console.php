@@ -21,16 +21,16 @@ class Console
         echo "$line\n";
     }
 
-    public function printError($message): void
+    public function printMiss($message): void
     {
-        $this->setForegroundColor(Color::RED);
+        $this->setForegroundColor(Color::CADET_BLUE);
         $this->println($message);
         $this->resetForegroundColor();
     }
 
-    public function printSuccess($message): void
+    public function printHit($message): void
     {
-        $this->setForegroundColor(Color::CHARTREUSE);
+        $this->setForegroundColor(Color::RED);
         $this->println($message);
         $this->resetForegroundColor();
     }

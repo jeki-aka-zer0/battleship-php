@@ -41,7 +41,7 @@ class App
     {
         $allData = require __DIR__ . '/Batteship/FleetSets.php';
         $size = count($allData);
-        $data = $allData[random_int(0, $size)];
+        $data = $allData[random_int(0, $size - 1)];
 
         self::$enemyFleet = GameController::initializeShips(self::$enemyFleet, $data);
     }
@@ -109,9 +109,9 @@ class App
             }
 
             if ($isHit) {
-                self::$console->printSuccess("Yeah! Nice hit! 🎯");
+                self::$console->printHit("Yeah! Nice hit! 🎯");
             } else {
-                self::$console->printError("Miss 🌊");
+                self::$console->printMiss("Miss 🌊");
             }
 
             self:: printGameResultIfFinished();
@@ -128,9 +128,9 @@ class App
                 $isHit ? "hit your ship! 🎯\n" : "miss 🌊"
             );
             if ($isHit) {
-                self::$console->printError($message);
+                self::$console->printHit($message);
             } else {
-                self::$console->printSuccess($message);
+                self::$console->printMiss($message);
             }
             if ($isHit) {
                 self::beep();
