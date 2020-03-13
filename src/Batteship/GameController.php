@@ -6,13 +6,16 @@ use InvalidArgumentException;
 
 class GameController
 {
-    public static function checkShips(array $fleet)
+    public static function isFleetDead(array $fleet) : bool
     {
         foreach ($fleet as $ship) {
             if ($ship->isSunken()) {
-
+                continue;
+            } else {
+                return false;
             }
         }
+        return true;
     }
 
     public static function checkIsHit(array &$fleet, $shot)
@@ -40,7 +43,7 @@ class GameController
     public static function initializeShips(array $fleet, array $data): array
     {
         foreach ($data as $name => $item) {
-            $size = count($item['positions']);
+            $size = count($item['positions'] ?? []);
             $ship = new Ship($name, $size, $item['color']);
 
             foreach ($item['positions'] as $position) {

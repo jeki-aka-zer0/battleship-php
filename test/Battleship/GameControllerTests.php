@@ -1,19 +1,31 @@
 <?php
 
-
 namespace Battleship;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use TypeError;
 
 //use PHPUnit\Util\Exception;
 
 final class GameControllerTests extends TestCase
 {
+    private $data = [
+        'Aircraft Carrier' => [
+            'color' => Color::CADET_BLUE,
+            'positions' => [
+                ['B', 1],
+                ['B', 2],
+                ['B', 3],
+                ['B', 4],
+                ['B', 5],
+            ],
+        ],
+    ];
+
     public function testCheckIsHitTrue()
     {
-        $ships = GameController::initializeShips();
+        $fleet = [];
+        $ships = GameController::initializeShips($fleet, $this->data);
         $counter = 0;
 
         foreach ($ships as $ship) {
@@ -33,7 +45,8 @@ final class GameControllerTests extends TestCase
 
     public function testCheckIsHitFalse()
     {
-        $ships = GameController::initializeShips();
+        $fleet = [];
+        $ships = GameController::initializeShips($fleet, $this->data);
         $counter = 0;
 
         foreach ($ships as $ship) {
@@ -53,13 +66,16 @@ final class GameControllerTests extends TestCase
 
     public function testCheckIsHitPositstionIsNull()
     {
+        $fleet = [];
+        $data = [];
         $this->expectException(InvalidArgumentException::class);
-        GameController::checkIsHit(GameController::initializeShips(), null);
+        GameController::initializeShips($fleet, $data);
+        GameController::checkIsHit($fleet, null);
     }
 
     public function testCheckIsHitShipIsNull()
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(\Error::class);
         GameController::checkIsHit(null, new Position('H', 1));
     }
 
@@ -73,7 +89,7 @@ final class GameControllerTests extends TestCase
 
     public function testIsShipValidTrue()
     {
-        $positions = array(new Position('A', 1), new Position('A', 1), new Position('A', 1));
+        $positions = [new Position('A', 1), new Position('A', 1), new Position('A', 1)];
         $ship = new Ship("TestShip", 3);
         foreach ($positions as $position) {
             array_push($ship->getPositions(), $position);
@@ -82,5 +98,11 @@ final class GameControllerTests extends TestCase
         $result = GameController::isShipValid($ship);
 
         $this->assertTrue($result);
+    }
+
+    public function testIsFleetDead()
+    {
+        $fleet = GameController::initializeShips([], $this->data);
+        $this->assertFalse(GameController::isFleetDead($fleet));
     }
 }
