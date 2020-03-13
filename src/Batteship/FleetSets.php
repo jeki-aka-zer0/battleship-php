@@ -2,15 +2,6 @@
 
 use Battleship\Color;
 
-return [[
-    'Patrol Boat' => [
-        'color' => Color::ORANGE,
-        'positions' => [
-            ['A', 1],
-            ['A', 2],
-        ],
-    ],
-]];
 return array(
 // 1
     ["Aircraft Carrier" => [
