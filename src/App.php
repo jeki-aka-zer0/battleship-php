@@ -114,6 +114,8 @@ class App
                 self::$console->printError("Miss 🌊");
             }
 
+            self:: printGameResultIfFinished();
+
             self::$console->println();
 
             $position = self::getRandomPosition();
@@ -136,10 +138,33 @@ class App
                 self::$console->println('Boom 💥');
             }
 
+            self:: printGameResultIfFinished();
+
             self::$console->println('');
             self::$console->printLine();
             self::$console->println('');
-//            exit();
+        }
+    }
+
+    private static function isMyVictory()
+    {
+        return GameController::isFleetDead(self::$enemyFleet);
+    }
+
+    private static function isComputerVictory()
+    {
+        return GameController::isFleetDead(self::$myFleet);
+    }
+
+    private static function printGameResultIfFinished()
+    {
+        if (self::isMyVictory()) {
+            self::$console->println('My victory!!');
+            exit;
+        }
+        if (self::isComputerVictory()) {
+            self::$console->println('Computer victory!!');
+            exit;
         }
     }
 
